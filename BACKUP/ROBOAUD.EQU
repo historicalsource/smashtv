@@ -1,0 +1,627 @@
+*
+*HARDWARE EQUATES (MOVE TO SYS.INC)
+*
+SECCHIP	EQU	01C00060H	; LOCATION OF SECURITY CHIP JKM 2/13/90
+
+	.GLOBAL	GET_ADJ, AUD, AUD1
+         .GLOBAL         RC_BYTEI,RC_BYTE,RC_WORD,RC_LONG,RC_LONGI
+         .GLOBAL         WC_BYTE,WC_BYTEI,WC_WORD,WC_WORDI,WC_LONG
+         .GLOBAL         WC_LONGI
+	.GLOBAL	AUDOUT
+	.GLOBAL 	SYSCOPY
+;         .GLOBAL         PT_ENTRY
+;         .GLOBAL         INIT_TB
+;         .GLOBAL         INIT_TAB    ;GEORGES POWER UP ENTRY
+;         .GLOBAL         P_FORK 
+;         .GLOBAL         VAL_TAB
+;         .GLOBAL         ROM_PTRS
+;         .GLOBAL         ALL_TAB
+;         .GLOBAL         TOD_TAB
+;         .GLOBAL         E_GAME
+;         .GLOBAL         ISHSTD
+;         .GLOBAL         SET_PAGE
+;         .GLOBAL         A2_CHECK
+;         .GLOBAL         DEC_HSR,INIT_HSR,GET_HSC
+	.GLOBAL	KILL_AUD,CLR_AUDR,CLR_AUD
+;	.DEF	DEF_PAGE, GET_AUD, CMOS_VAL, FAC_SET
+;	.DEF	FORM_ADC, F_ADC_S, ADJ_PAGE, PUT_ADJ
+;	.DEF	CMOSLOCK, CMOSUNLOCK, STORE_AUDIT
+*
+*	TIMED PAUSE
+*
+PAUSE   $MACRO TIME, REG
+         MOVI :TIME:, :REG:, L
+LABEL?:  NOP
+         DSJS :REG:, LABEL?
+        $END
+*
+*BIT SET
+*	BSET	BIT# 0-31(KONSTANT OR REGISTER),REGISTER TO SET BIT IN
+* NOTE: A14 IS DESTROYED, 'A' FILE REGISTERS ONLY
+*
+BSET	$MACRO	P1,R1
+	MOVK	1,A14
+	SLL	:P1:,A14
+	OR	A14,:R1:
+	$END
+*
+*FCALL - FUNCTION CALL WITHOUT USING THE SYSTEM STACK
+*	FCALL	ROUTINE, BREG
+*
+FCALL   $MACRO NAME, BREG
+         MOVI  :NAME:, :BREG:, L
+         EXGPC :BREG:
+        $END
+*
+*FRET - FUNCTION RETURN WITHOUT USING THE SYSTEM STACK
+*	FCALL	ROUTINE, BREG
+*
+FRET    $MACRO BREG
+         EXGPC :BREG:
+        $END
+
+*
+*        AUDITS
+*
+*        AUDITS ARE HANDLED BY AUDITS NUMBER OFF OF THE BASE
+*        OF THE AUDIT REGION
+*
+*        IF "CHUTES" VALUE IS CHANGED....EXTRA VALUES MUST
+*        BE PUT IN THIS TABLE.  (AND ADJUSTMENT TABLE OF COURSE)
+*
+*
+AUDNULL		EQU     0
+AUDLCOIN	EQU     1       ; TOTAL COINS IN LEFT CHUTE
+AUDCCOIN	EQU     2	; TOTAL COINS IN CENTER CHUTE
+AUDRCOIN	EQU     3	; TOTAL COINS IN RIGHT CHUTE
+AUD4COIN	EQU	4	; TOTAL COINS IN FOURTH CHUTE
+AUDSCOIN	EQU	5	; TOTAL SERVICE CREDITS
+AUDCRED		EQU	6	; TOTAL CREDITS
+AUDSTART	EQU	7	; TOTAL GAME STARTS
+AUDCONT		EQU	8 	; TOTAL CONTINUES
+AUD1TIME	EQU	9	; 1 PLAYER TIME
+AUD2TIME	EQU	10	; 2 PLAYER TIME
+AUDUPTIME	EQU	11	; TOTAL UPTIME
+AUDXMEN		EQU	12	; XTRA MEN EARNED 
+AUDRM11		EQU	13	; LEVEL 1 ROOM 1
+AUDRM12		EQU	14	; LEVEL 1 ROOM 2
+AUDRM13		EQU	15	; LEVEL 1 ROOM 3
+AUDRM14		EQU	16	; LEVEL 1 ROOM 4
+AUDRM15		EQU	17	; LEVEL 1 ROOM 5
+AUDMUT		EQU	18	; MUTOID MAN
+AUDRM21		EQU	19	; LEVEL 2 ROOM 1
+AUDRM22		EQU	20	; LEVEL 2 ROOM 2
+AUDRM23		EQU	21	; LEVEL 2 ROOM 3
+AUDRM24		EQU	22	; LEVEL 2 ROOM 4
+AUDRM25		EQU	23	; LEVEL 2 ROOM 5
+AUDFAC		EQU	24	; FLATFACE
+AUDRM31		EQU	25	; LEVEL 3 ROOM 1
+AUDRM32		EQU	26	; LEVEL 3 ROOM 2
+AUDRM33		EQU	27	; LEVEL 3 ROOM 3
+AUDRM34		EQU	28	; LEVEL 3 ROOM 4
+AUDRM35		EQU	29	; LEVEL 3 ROOM 5
+AUDCOB	     	EQU	30	; COBRA
+AUDAUTO         EQU    31       ; AUTO CYCLE PASSES
+AUDWDOG	        EQU    32       ; WATCHDOG HITS
+*
+LAST_AUDIT       EQU    32     
+*
+FRSTGAUD         EQU     AUDSTART
+LASTGAUD         EQU     LAST_AUDIT
+*
+FRST_C		EQU     AUDLCOIN     ;FOR CLEARING COINS
+LAST_C		EQU     AUDCRED
+
+*EQUATES FOR STRINGF
+B_LJUSTIFY	EQU	0		;LEFT JUSTIFY WITHIN FIELD
+B_CJUSTIFY	EQU	1		;CENTER JUSTIFY WITHIN FIELD
+B_PSIGN		EQU	2		;PRINT SIGN IF SIGNED
+B_COMMAS	EQU	3		;PRINT COMMAS
+B_PHEX		EQU	4		;PRINT HEX PREFIX
+B_ZPRINT	EQU	5		;FILL UNUSED WIDTH WITH ZEROS
+B_SIGNED	EQU	6		;THIS VALUE IS OF SIGNED TYPE
+B_CAP		EQU	7		;USE CAPITAL LETTERS FOR HEX DIGITS
+**************************************************************************
+*								         *
+* 	MORE RANDOM TROG INCLUDES					 *
+*								         *
+**************************************************************************
+
+**************************************************************************
+*								         *
+* 	COINAGE STUFF							 *
+*								         *
+**************************************************************************
+
+CHUTES   EQU     4                    ;MAXIMUM COIN CHUTES IN GAME.
+
+L_COIN_BIT       EQU     1H
+C_COIN_BIT       EQU     4H
+R_COIN_BIT       EQU     2H
+X_COIN_BIT       EQU     80H
+SLAM_BIT         EQU     8H
+
+MENU_PID         EQU      0AC1H   ;GET_MENU SLAVE
+MDUN_PID         EQU      0AC2H   ;MENU SLAVE CHANGES TO THIS WHEN DONE
+
+LONG_SIZE        EQU     32
+WORD_SIZE        EQU     16
+BYTE_SIZE        EQU     8
+
+C_LONG_SIZE      EQU     64
+C_WORD_SIZE      EQU     32
+C_BYTE_SIZE      EQU     16
+
+BYTE_MASK        EQU     0FFH
+WORD_MASK        EQU     0FFFFH
+
+SX_MASK           EQU     0FFFFH
+SY_MASK           EQU     0FFFF0000H
+
+**************************************************************************
+*                                                                        *
+*          ASCII STUFF                                                   *
+*                                                                        *
+**************************************************************************
+
+SPACE    EQU     20H
+EX_PT    EQU     21H
+LET_0    EQU     30H
+LET_A    EQU     41H
+LET_Z    EQU     5AH
+UNDERSCORE EQU   5FH
+FONT_SPACE  EQU     7EH
+FONT_RUB EQU     FONT_SPACE+1
+FONT_END EQU     FONT_RUB+1
+FONT_RQUOTE EQU  FONT_END+1
+FONT_EPOUND equ  FONT_RQUOTE+1
+FONT_CR     equ  FONT_EPOUND+1
+ASCII_COMMA EQU  2CH
+RIGHT_PAREN EQU  29H
+ASCII_DQ EQU     22H
+
+**************************************************************************
+*                                                                        *
+*          AUDIT STRUCTURE                                               *
+*                                                                        *
+**************************************************************************
+
+AUD_DATA EQU     0                 ;THE COUNTER IS 4 BYTES STARTING AT ZERO
+AUD_CKSUM        EQU     AUD_DATA+(4*C_BYTE_SIZE)  ;CHECKSUM = 2 BYTES
+AUD_SIZE         EQU     AUD_CKSUM+C_WORD_SIZE
+AUD_BYTES_TO_CHECK EQU    (AUD_SIZE/C_BYTE_SIZE)-2  ;# TO ADD FOR CHECKSUM
+N_AUDITS         EQU    33	;ONE MORE THAN ACTUAL #
+
+
+**************************************************************************
+*                                                                        *
+*          ADJUSTMENTS                                                   *
+*                                                                        *
+**************************************************************************
+ADJ_SIZE         EQU     C_LONG_SIZE
+N_ADJUSTS        EQU     28           ;28 NORMAL ADJUSTMENTS
+
+
+**************************************************************************
+*                                                                        *
+*                                                                        *
+*          CMOS STUFF FOR HSTD..........MOVE THIS TO SPECIAL EQUATE FILE *
+*          SOME DAY                                                      *
+*                                                                        *
+*                                                                        *
+**************************************************************************
+*
+*        High Score table (CMOS) entry data structure
+*
+NUM_INITS        EQU     3          ;INITIALS IN EACH ENTRY..THIS MUST BE ODD
+*
+HS_SCORE         EQU     0                        ;LONG WORD.....8 DIGIT SCORE
+HS_COL		EQU	HS_SCORE+C_LONG_SIZE	; PALETTE TO PLOT IN
+HS_INITS         EQU     HS_COL+C_WORD_SIZE     ;BYTE FOR FIRST INITIAL
+HS_CKBYTE        EQU     HS_INITS+(NUM_INITS*C_BYTE_SIZE)  ;BYTE FOR CHECKSUM
+HS_SIZE          EQU     HS_CKBYTE+C_BYTE_SIZE    ;SIZE OF STRUCTURE
+HS_BYTES_TO_CHECK EQU    (HS_SIZE/C_BYTE_SIZE)-1  ;# TO ADD FOR CHECKSUM
+HS_SIZE_IN_WORDS  EQU    HS_SIZE/C_WORD_SIZE      ;SIZE OF ENTRY IN WORDS
+HS_SIZE_IN_BYTES  EQU    HS_SIZE/C_BYTE_SIZE      ;SIZE OF ENTRY IN BYTES
+HS_ROM_SIZE       equ    HS_SIZE/2                ;address size of rom entry
+
+RHS_VALID	EQU	0
+RHS_SCORE	EQU	RHS_VALID+WORD_SIZE
+RHS_COL		EQU	RHS_SCORE+LONG_SIZE
+RHS_INITS	EQU	RHS_COL+WORD_SIZE
+RHS_CKBYTE	EQU	RHS_INITS+(NUM_INITS*BYTE_SIZE)
+RHS_SIZE	EQU	RHS_CKBYTE+BYTE_SIZE
+
+
+
+
+
+
+**************************************************************************
+*                                                                        *
+*         A HIGH SCORE TABLE IS DEFINED IN ROM BY THE FOLLOWING          *
+*         STRUCTURE (THERE ARE AT LEAST 2 TABLES....ALL TIME             *
+*         AND "TODAYS")                                                  *
+*                                                                        *
+**************************************************************************
+TB_POINTER       EQU     0                      ;LONG-POINTER TO BEGINNING OF TABLE
+TB_COUNT         EQU     TB_POINTER+LONG_SIZE   ;WORD....# IN THE TABLE.
+TB_VISIBLE       EQU     TB_COUNT+WORD_SIZE ;WORD....NUMBER DISPLAYED
+TB_PAGE_BITS     EQU     TB_VISIBLE+WORD_SIZE     ;WORD....STATUS WORD FOR CMOS PAGE
+TB_FACTORY       EQU     TB_PAGE_BITS+WORD_SIZE   ;LONG....ROM STARTUP TABLE
+TB_ERROR_COUNT   EQU     TB_FACTORY+LONG_SIZE     ;WORD....NUM ERRORS TO RE-INIT
+*
+CMOS     EQU     1400000H        ;BASE OF CMOS
+WPCMOS   EQU     1404000H        ;WRITE PROTECTED CMOS
+WP_READ  EQU     1C00010H        ;PLACE TO READ WRITE PROTECT STATUS
+SND_TALK EQU     1C00020H        ;SOUND BOARD TALK BACK.
+WP_BIT   EQU     800H            ;BIT WHERE WRITE ENABLE LIVES  0=NO WRITES
+CMOS_PAGE_SELECT_BITS EQU 0C0H   ;BITS 6 AND 7 OF SYSCTRL SELECT CMOS PAGE
+CMOS_PAGE_SELECT_UNIT EQU 040H   ;4 PAGES USE MULTIPLES OF THIS
+*
+**************************************************************************
+*                                                                        *
+*          CMOS ALLOCATION                                               *
+*                                                                        *
+**************************************************************************
+*
+*        4 PAGES OF 2K
+*
+*        EACH PAGE.....LOW 1K = READ/WRITE
+*                     HIGH 1K = WRITE PROTECTED
+*
+*        PAGE 1        LOW HALF = AUDITS
+*                     HIGH HALF = ADJUSTMENTS
+*
+*        PAGE 0        LOW HALF = HSTD TODAY
+*
+*        PAGE 2        LOW HALF = HSTD ALL TIME
+*
+
+ALL_TIME_ORIGIN   EQU     CMOS
+ALL_TIME_SELECT   EQU     CMOS_PAGE_SELECT_UNIT*2
+ALL_TIME_VISIBLE  EQU     20
+*TODAYS_ORIGIN     EQU     ALL_TIME_ORIGIN+(HS_SIZE*37)
+TODAYS_ORIGIN     EQU     CMOS
+TODAYS_SELECT     EQU     CMOS_PAGE_SELECT_UNIT*0
+TODAYS_VISIBLE    EQU     10
+
+AUDIT_SELECT     EQU     CMOS_PAGE_SELECT_UNIT*1
+HSR_SELECT       EQU     AUDIT_SELECT                ;HIGH SCORE RESET COUNTER
+COIN_SELECT      EQU     AUDIT_SELECT                ;COINS AND CREDITS
+*
+ADJUST_SELECT    EQU     CMOS_PAGE_SELECT_UNIT*1
+*
+DUMP_SELECT      EQU     CMOS_PAGE_SELECT_UNIT*3
+DUMP_ORG         EQU     CMOS
+DUMP_PTR         EQU     DUMP_ORG               ;WORD....NUMBER OF ENTRIES!
+DUMP_DATA        EQU     DUMP_PTR+C_WORD_SIZE   ;DUMPS GO HERE!
+*
+*        AUDIT PAGE AUDIT DATA AND CREDITS
+*
+AUDITORG         EQU     CMOS                             ;AUDITS LIVE HERE
+CREDITS          EQU     AUDITORG+(N_AUDITS*AUD_SIZE)     ;BYTE FOR CREDITS
+CUNITS           EQU     CREDITS+C_BYTE_SIZE              ;WORD
+BUNITS           EQU     CUNITS+C_WORD_SIZE               ;WORD
+MINUNITS         EQU     BUNITS+C_WORD_SIZE               ;WORD
+COIN_CKSUM       EQU     MINUNITS+C_WORD_SIZE             ;BYTE
+HSR_C            EQU     COIN_CKSUM+C_BYTE_SIZE           ;LONG = HIGH SCORE RESET COUNTER
+*
+*        NEXT TWO ARE ASSUMED TO BE BACK TO BACK
+*
+HRESET_COUNTER   EQU     HSR_C+C_LONG_SIZE                ;LONG = HIGH SCORE RESET COUNTER
+HRESET_VERIFY    EQU     HRESET_COUNTER+C_LONG_SIZE       ;LONG = 2ND COPY INVERTED.
+
+COIN_CKSUM_START EQU     CREDITS
+COIN_CKSUM_SIZE  EQU     COIN_CKSUM-COIN_CKSUM_START      ;SIZE OF REGION TO CHECK
+COIN_CKSUM_BYTES EQU     COIN_CKSUM_SIZE/C_BYTE_SIZE      ;NUMBER OF BYTES TO ADD
+
+CMESS_CHARS      EQU     25                     ;25 CHARS/LINE OF CUSTOM MESSAGE
+CMESS_LINES      EQU     3                      ;3 LINES
+CMESS_LINE_SIZE  EQU     CMESS_CHARS*C_BYTE_SIZE
+CMESS_SIZE       EQU     CMESS_LINES*CMESS_LINE_SIZE
+
+VALID_VALUE      EQU     0EABCH                 ;STORED AT "VALID_CUSTOM" IF OK!
+
+NAME_REV_SIZE    EQU     30                     ;NAME AND REV DATA
+
+ADJUSTORG        EQU     WPCMOS                 ;FIRST ADJUSTMENT HERE
+CUSTOM_MESSAGE   EQU     ADJUSTORG+(N_ADJUSTS*ADJ_SIZE)
+VALID_CUSTOM     EQU     CUSTOM_MESSAGE+CMESS_SIZE        ;WORD = EABC IF OK.
+END_CK_REGION    EQU     VALID_CUSTOM+C_WORD_SIZE
+ADJ_AREA_SIZE    EQU     END_CK_REGION-ADJUSTORG          ;ADJUSTS+CUSTOM MESSAGE
+ADJ_CKSUM        EQU     END_CK_REGION                    ;WORD CHECK FOR ADJUSTS
+ADJ_BYTES_TO_CHECK EQU   ADJ_AREA_SIZE/C_BYTE_SIZE        ;NUMBER OF BYTES IN CHECKSUM.
+NAME_REV         EQU     ADJ_CKSUM+C_WORD_SIZE
+END_ADJ          EQU     NAME_REV+(NAME_REV_SIZE*C_BYTE_SIZE)
+*
+
+
+
+
+
+
+**************************************************************************
+*                                                                        *
+*          COLOR STUFF -- PALETTE 0                                      *
+*                                                                        *
+**************************************************************************
+TROG_RED	EQU	0101H	
+TROG_WHITE	EQU	0202H
+TROG_BLUE	EQU	0303H
+TROG_GREY	EQU	0404H
+TROG_YELLOW	EQU	0505H
+TROG_PURPLE	EQU	0606H
+TROG_GREEN	EQU	0707H
+TROG_BLACK	EQU	0808H
+TROG_REDGOLD	EQU	0B0BH
+TROG_DECAY	EQU	0C0CH
+TROG_LF		EQU	0D0DH
+TROG_RGB	EQU	0E0EH
+DINO_INTENSE	EQU	0E0EH
+
+TROG_PRED	EQU	01010000H
+TROG_PWHITE	EQU	02020000H
+TROG_PBLUE	EQU	03030000H
+TROG_PGREY	EQU	04040000H
+TROG_PYELLOW	EQU	05050000H
+TROG_PPURPLE	EQU	06060000H
+TROG_PGREEN	EQU	07070000H
+TROG_PBLACK	EQU	08080000H
+TROG_PBPR	EQU	0A0A0000H
+TROG_PREDGOLD	EQU	0B0B0000H
+TROG_PDECAY	EQU	0C0C0000H
+TROG_PLF	EQU	0D0D0000H
+TROG_PRGB	EQU	0E0E0000H
+
+DINO_PINTENSE	EQU	0E0E0000H
+
+
+**************************************************************************
+*                                                                        *
+*          TROG (R)                                                      *
+*                                                                        *
+*          Copyright 1990 Williams Electronics Games Inc.                *
+*          All Rights Reserved                                           *
+*                                                                        *
+**********************************MENU EQUATES****************************
+
+**************************************************************************
+*								         *
+* 	SCREEN_WIDE							 *
+* 									 *
+* 	CONSTANT FOR MENU SCREEN SIZE DEFINITIONS			 *
+* 									 *
+* 	= 0	400 X 256 ( TROG )					 *
+* 									 *
+* 	= 1 	512 X 400 ( NARC )					 *
+*								         *
+**************************************************************************
+
+SCREEN_WIDE	EQU	0
+
+*
+*        FOR EACH ENTRY IN THE MENU
+*
+MENU_TEXT_PTR    EQU     0            ;OFFSET OF TEXT POINTER
+MENU_ROUTINE     EQU     LONG_SIZE    ;OFFSET OF ROUTINE
+MENU_HELP        EQU     MENU_ROUTINE+LONG_SIZE
+MENU_ENTRY_SIZE  EQU     3*LONG_SIZE   
+*
+BLNK_HELP        EQU     0            ;NO HELP BOX FOR THIS ENTRY
+NO_HELP          EQU     00000001H    ;NO HELP AREA IN THIS MENU 
+ADJ_HELP         EQU     00000002H    ;PASS STRUCTURE POINTER TO ADJUSTMENT HELP ROUT
+SND_HELP         EQU     00000003H    ;CALLED ON SOUND TEST MENU
+SND_PLAY         EQU     00000004H    ;CALLED FROM SOUND "PLAY" SELECTIONS
+*
+SND_MESS_Y       EQU	200
+SND_BOX_H        EQU     57
+
+*
+*        SPACING BETWEEN BOXES ON SCREEN
+*
+	.IF	SCREEN_WIDE
+BOX_YGAP EQU     6
+BOX_XGAP EQU     6
+	.ELSE
+BOX_YGAP EQU     3
+BOX_XGAP EQU     5
+	.ENDIF
+*
+*
+*        A CENTERED BOX NEEDS TO BE MOVED LEFT THIS AMOUNT
+*        (PIXELS) TO CORRECTELY FRAME CENTERED TEXT AT
+*        THE SAME POSITION
+*
+*C_KLUDGE EQU        3           ;BEFORE "SPACE WIDTH" BUG FIX
+C_KLUDGE EQU     1
+*
+*        THESE DETERMINE THE THICKNESS OF THE BOX LINES
+*
+	.IF	SCREEN_WIDE
+MB_XWID  EQU     5		; NARC VALUES
+MB_YWID  EQU     5
+	.ELSE
+MB_XWID  EQU     3
+MB_YWID  EQU     3
+	.ENDIF
+
+*
+*        GAP BETWEEN A MENU BORDER BOX AND
+*        THE SELECTION BAR
+*
+GAP      EQU     2               ;GAP BETWEEN BORDER AND SELECTION BAR
+*
+*        CONSTANT TO PASS TO "DO_BORDER" FOR OUR
+*        BOX SIZE
+*
+BORDER_SIZE      EQU     (MB_YWID*10000H)+MB_XWID
+
+*******************************TEST TITLE CONSTANTS****************************
+*
+*        THESE ARE USED TO SET TOP BOX AND MAIN TITLE.
+*        THE MENUS AND HELP SCREENS WILL SQUARE OFF 
+*        TO THE NUMBERS SET HERE.
+*
+	.IF	SCREEN_WIDE
+TM_X     EQU     256             ;USED TO POSITION TITLE AND BOX TOGETHER
+TM_Y     EQU     24
+	.ELSE
+TM_X	EQU	200
+TM_Y	EQU	24
+	.ENDIF
+
+	.IF	SCREEN_WIDE
+TIT_ULX  EQU     TM_X-212
+TIT_LRX  EQU     TM_X+204
+TIT_ULY  EQU     TM_Y-09
+TIT_LRY  EQU     TM_Y+49
+	.ELSE
+TIT_ULX  EQU     TM_X-195
+TIT_LRX  EQU     TM_X+189
+TIT_ULY  EQU     TM_Y-06
+TIT_LRY  EQU     TM_Y+32
+	.ENDIF
+
+********************************MAIN MENU CONSTANTS***************************
+
+INST_ULY 	EQU     TIT_LRY+BOX_YGAP     ;Y RANGE FOR INSTRUCTION BOX
+	.IF	SCREEN_WIDE
+INST_LRY 	EQU     INST_ULY+40
+BAR_DY   	EQU     -12
+BAR_WID 	EQU     235
+MENU_DY  	EQU     42
+BAR_HITE 	EQU     40
+BAR_DX   	EQU     8
+	.ELSE
+INST_LRY	EQU	INST_ULY+29
+BAR_DY   	EQU     -8
+BAR_WID 	EQU     183
+;BAR_WID 	EQU     (TIT_LRX-TIT_ULX)
+;MENU_DY  	EQU     27
+MENU_DY  	EQU     23
+BAR_HITE 	EQU     26
+BAR_DX   	EQU     6
+	.ENDIF
+
+MENU_X   EQU     TIT_ULX+GAP+MB_XWID+(BAR_WID/2)+C_KLUDGE
+MENU_Y   EQU     INST_LRY+BOX_YGAP+MB_YWID+GAP-BAR_DY
+*
+*        HELP DRAWER CONSTANTS
+*
+HELP_X_MARGIN    EQU     10                ;MARGIN FOR LEFT JUSTIFIED HELP TEXT
+HELP_Y_MARGIN    EQU     8                 ;TOP OF BOX TO 1ST ENTRY
+HELP_YLO_MARGIN  EQU     HELP_Y_MARGIN-4   ;BOTTOM MARGIN IS A TOUCH LESS DUE
+*                                          ;TO SPACING
+HELP_DY          EQU     12                ;SCREEN UNITS PER ITEM.
+*
+*
+*        ADJUSTMENT MENU CONSTANTS
+*
+*        "CURRENT SETTING" BOX
+*
+CUR_ULY  EQU     125
+CUR_LRX  EQU     TIT_LRX
+CUR_LRY  EQU     CUR_ULY+(INST_LRY-INST_ULY)    ;SAME HEIGHT AS TOP BOX
+CUR_ULY2	EQU	180
+CUR_LRY2	EQU	CUR_ULY2+(INST_LRY-INST_ULY)
+*
+ADJ_ULY  EQU     CUR_LRY2+BOX_YGAP               ;USE OUR "FIXED" SPACING.
+ADJ_CULY	EQU	ADJ_ULY-50		; COIN UPPER LEFT Y
+ADJ_PULY	EQU	ADJ_ULY-28
+*
+;COIN_HEAD_Y  EQU    CUR_ULY+91                  ;1ST OF TOP COIN INFO LINES
+COIN_HEAD_Y  EQU    CUR_ULY+71                  ;1ST OF TOP COIN INFO LINES
+MESS_CTS     EQU    COIN_HEAD_Y+35             ;START/CONTINUE PLACE
+
+**************************************************************************
+*                                                                        *
+*                  COIN SELECT TABLE OFFSETS                             *
+*                                                                        *
+**************************************************************************
+*
+*        IF "CHUTES" VALUE CHANGES.....EXTRA WORDS MUST BE PUT HERE
+*
+CS_LMULT EQU     0
+CS_CMULT EQU     CS_LMULT+WORD_SIZE
+CS_RMULT EQU     CS_CMULT+WORD_SIZE
+CS_UCRED EQU     CS_RMULT+WORD_SIZE
+CS_UBON  EQU     CS_UCRED+WORD_SIZE
+CS_UMIN  EQU     CS_UBON+WORD_SIZE
+*CS_STRT  EQU     CS_UMIN+WORD_SIZE     
+*CS_CONT  EQU     CS_STRT+WORD_SIZE     
+CS_CDIV  EQU     CS_UMIN+WORD_SIZE
+CS_FRAC  EQU     CS_CDIV+WORD_SIZE
+CS_COPY  EQU     CS_FRAC+WORD_SIZE         ;UP TO HERE IS COPIED AS ADJUSTMENTS
+CS_LVAL  EQU     CS_COPY
+CS_CVAL  EQU     CS_LVAL+WORD_SIZE
+CS_RVAL  EQU     CS_CVAL+WORD_SIZE
+CS_LMES  EQU     CS_RVAL+WORD_SIZE
+CS_RMES  EQU     CS_LMES+LONG_SIZE
+CS_PROMPT EQU    CS_RMES+LONG_SIZE
+CS_TITLE EQU     CS_PROMPT+LONG_SIZE
+CS_LIST  EQU     CS_TITLE+LONG_SIZE
+CS_PICK  EQU     CS_LIST+LONG_SIZE         ;WHICH LINE TO ADD TO 2 TO START...1 TO
+CS_SLOTS EQU     CS_PICK+WORD_SIZE         ;TEXT DESCRIBING COIN SLOTS
+CS_SIZE  EQU     CS_SLOTS+LONG_SIZE
+*
+*
+*        ADJUSTMENT STRUCTURE.   THIS STRUCTURE IS
+*        POINTED TO BY THE 2ND MENU LONG WORD (WHERE NORMALLY
+*        THE ROUTINE LIVES).  
+*
+AD_ROUT  EQU     0                         ;LONG...ROUTINE TO RUN WHEN SELECTED.
+AD_TITLE EQU     AD_ROUT+LONG_SIZE         ;LONG...POINTER TO TITLE FOR RIGHT COLUMN
+AD_HELP  EQU     AD_TITLE+LONG_SIZE        ;LONG...POINT TO HELP STRUCT FOR EXPLANATION
+AD_CMOS  EQU     AD_HELP+LONG_SIZE         ;WORD...GET_ADJ / PUT_ADJ NUMBER.
+AD_MIN   EQU     AD_CMOS+WORD_SIZE         ;LONG...MINIMUM VALUE FOR ADJ.
+AD_MAX   EQU     AD_MIN+LONG_SIZE          ;LONG...MAXIMUM VALUE FOR ADJ.
+AD_DELTA EQU     AD_MAX+LONG_SIZE          ;LONG...UNITS BETWEEN VALUES.
+AD_ZEQU  EQU     AD_DELTA+LONG_SIZE        ;LONG...NUMBER TO STORE AS A ZERO.
+AD_NAMEIT EQU    AD_ZEQU+LONG_SIZE         ;LONG...ROUTINE TO PRINT VALUES.
+AD_FLAGS  EQU    AD_NAMEIT+LONG_SIZE       ;WORD...bit zero non zero says wrap 
+*                                          ;       bit one non zero says BCD
+                                           ;       bit two says flag "1st 8 coinage changed"  (ADJVIRGIN)
+                                           ;       bit three says flag 1st 6 changed  (ADJ1st6)
+                                           ;       bit four says its hsr counter
+AD_NAMPTR EQU    AD_FLAGS+WORD_SIZE        ;LONG...POINTER TO DATA FOR NAMEIT ROUTINE
+AD_MAIN  EQU     AD_NAMPTR+LONG_SIZE       ;LONG...MAIN MENU STRING
+
+WRAP_BIT EQU     0
+BCD_BIT  EQU     1
+VIRG_BIT EQU     2
+SIX_BIT  EQU     3
+HSR_BIT  EQU     4
+WRAP_VAL EQU     1
+BCD_VAL  EQU     2
+VIRG_VAL EQU     4
+SIX_VAL  EQU     8
+HSR_VAL  EQU     16
+*
+*        FOR CSELECT TABLE......
+*
+*        A1 = 1  PLOT ONLY THE STRING LIST (1 OR 2 POINTERS
+*                CENTERED APPROPRIATELY
+*
+*        A1 = 2  PLOT THE 1ST LINE OF THE STRING LIST ALONG
+*                WITH THE 2 CREDITS TO START...1 TO CONTINUE
+*        
+*        A1 = 3  PLOT THE 2ND LINE OF THE STRING LIST ALONG
+*                WITH THE 2 CREDITS TO START...1 TO CONTINUE
+*
+CSM_LIST EQU     1
+CSM_1W_21 EQU    2
+CSM_2W_21 EQU    3
+CSM_3W_21 EQU    4
+CSM_LAST EQU     4
+
+*
+*        FOR CS_PICK:
+*
+SHOW_NONE        EQU     0            ;JUST USE 2/1 BY ITSELF 
+SHOW_1           EQU     2            ;SHOW 1ST LINE
+SHOW_2           EQU     3            ;SHOW 2ND LINE
+SHOW_3           EQU     4            ;SHOW 3RD LINE
+
+
+

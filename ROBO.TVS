@@ -1,0 +1,40 @@
+.struct disp.equ
+.STRUCT MPROC.EQU
+.STRUCT ROBO.EQU
+.STRUCT	SYS.INC
+.km !f1 @D*ACTIVE\ PROC\ PLINK"CR"
+.km !f2 @D*OBJLST\ OBJ\ OLINK"CR"
+.km !f3 @DPALRAM\ PAL\ *"CR"
+.km s @D"CR"S
+.km w @D"CR"W
+; this is a comment
+.wp NOAUTOE,W,D
+.wp SAVESCR,W,D
+.wp CPULEFT,W,D
+.wp CPUAVG,W,D
+.WP KP_LS,B,H
+.WP KP_RS,B,H
+.WP KP_TS,B,H
+.WP STATUS,W,H
+.WP MUTON,B,H
+.WP P1PZ1,B,H
+.WP P1PZ2,B,H
+.WP P1PZ3,B,H
+.WP P1CSH,W,H
+.WP P2PZ1,B,H
+.WP P2PZ2,B,H
+.WP P2PZ3,B,H
+.WP P2CSH,W,H
+
+
+
+
+
+
+
+
+
+
+
+
+

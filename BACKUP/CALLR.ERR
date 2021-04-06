@@ -1,0 +1,550 @@
+
+
+Processing d:\video\robo\ndsp1.asm
+----------------------------------------------
+No External CALLR's in this module.
+
+Processing d:\video\robo\ram.asm
+----------------------------------------------
+No External CALLR's in this module.
+
+Processing d:\video\robo\util.asm
+----------------------------------------------
+d:\video\robo\util.asm(443): CALLR to SHVELCPY (COMMENT)
+d:\video\robo\util.asm(758): CALLR to DELSUPP (COMMENT)
+
+Processing d:\video\robo\pall.asm
+----------------------------------------------
+No External CALLR's in this module.
+
+Processing d:\video\robo\mproc.asm
+----------------------------------------------
+No External CALLR's in this module.
+
+Processing d:\video\robo\bakgnd.asm
+----------------------------------------------
+No External CALLR's in this module.
+
+Processing d:\video\robo\bgndtbl.asm
+----------------------------------------------
+No External CALLR's in this module.
+
+Processing d:\video\robo\bgndpal.asm
+----------------------------------------------
+No External CALLR's in this module.
+
+Processing d:\video\robo\imgtbl.asm
+----------------------------------------------
+No External CALLR's in this module.
+
+Processing d:\video\robo\imgpal.asm
+----------------------------------------------
+No External CALLR's in this module.
+
+Processing d:\video\robo\main.asm
+----------------------------------------------
+No External CALLR's in this module.
+
+Processing d:\video\robo\robo.asm
+----------------------------------------------
+No External CALLR's in this module.
+
+Processing d:\video\robo\score.asm
+----------------------------------------------
+d:\video\robo\score.asm(154): CALLR to KILLBEEP (COMMENT)
+d:\video\robo\score.asm(269): CALLR to KILLBEEP (COMMENT)
+
+Processing d:\video\robo\shots.asm
+----------------------------------------------
+No External CALLR's in this module.
+
+Processing d:\video\robo\hulks.asm
+----------------------------------------------
+No External CALLR's in this module.
+
+Processing d:\video\robo\coll2.asm
+----------------------------------------------
+No External CALLR's in this module.
+
+Processing d:\video\robo\sounds.asm
+----------------------------------------------
+No External CALLR's in this module.
+
+Processing d:\video\robo\patch.asm
+----------------------------------------------
+No External CALLR's in this module.
+
+Processing d:\video\robo\text.asm
+----------------------------------------------
+No External CALLR's in this module.
+
+Processing d:\video\robo\demo.asm
+----------------------------------------------
+No External CALLR's in this module.
+
+Processing d:\video\robo\waves.asm
+----------------------------------------------
+No External CALLR's in this module.
+
+Processing d:\video\robo\roboatt.asm
+----------------------------------------------
+No External CALLR's in this module.
+
+Processing d:\video\robo\hstd.asm
+----------------------------------------------
+d:\video\robo\hstd.asm(419): CALLR to HSTD_P (COMMENT)
+d:\video\robo\hstd.asm(439): CALLR to HSTD_P (COMMENT)
+
+Processing d:\video\robo\adjust.asm
+----------------------------------------------
+No External CALLR's in this module.
+
+Processing d:\video\robo\audit.asm
+----------------------------------------------
+d:\video\robo\audit.asm(1989): CALLR to HS_RESET_COUNTER (COMMENT)
+
+Processing d:\video\robo\menu.asm
+----------------------------------------------
+d:\video\robo\menu.asm(272): CALLR to CUSTOMP (COMMENT)
+d:\video\robo\menu.asm(872): CALLR to SEND_YAM (COMMENT)
+d:\video\robo\menu.asm(950): CALLR to SEND_YAM (COMMENT)
+d:\video\robo\menu.asm(961): CALLR to GET_SHAK (COMMENT)
+d:\video\robo\menu.asm(1018): CALLR to SEND_DAC (COMMENT)
+d:\video\robo\menu.asm(1037): CALLR to INC_IF_NEC (COMMENT)
+d:\video\robo\menu.asm(1050): CALLR to SEND_YAM (COMMENT)
+d:\video\robo\menu.asm(1058): CALLR to INC_IF_NEC (COMMENT)
+d:\video\robo\menu.asm(1071): CALLR to SEND_DAC (COMMENT)
+
+Processing d:\video\robo\test.asm
+----------------------------------------------
+d:\video\robo\test.asm(692): CALLR to CK_DOOR (COMMENT)
+d:\video\robo\test.asm(700): CALLR to CK_DOOR (COMMENT)
+d:\video\robo\test.asm(716): CALLR to CK_DOOR (COMMENT)
+d:\video\robo\test.asm(766): CALLR to GET_ADV (COMMENT)
+d:\video\robo\test.asm(786): CALLR to GET_ADV (COMMENT)
+d:\video\robo\test.asm(1669): CALLR to BLNKSNAM (COMMENT)
+d:\video\robo\test.asm(1678): CALLR to BLNKSNAM (COMMENT)
+d:\video\robo\test.asm(2448): CALLR to WDOGDIS
+d:\video\robo\test.asm(2455): CALLR to WDOGDIS
+d:\video\robo\test.asm(2478): CALLR to WDOGDIS
+d:\video\robo\test.asm(2487): CALLR to WDOGDIS
+d:\video\robo\test.asm(2503): CALLR to WDOGDIS
+d:\video\robo\test.asm(2518): CALLR to WDOGDIS
+
+Processing d:\video\robo\chaser.asm
+----------------------------------------------
+No External CALLR's in this module.
+
+Processing d:\video\robo\endwave.asm
+----------------------------------------------
+No External CALLR's in this module.
+
+Processing d:\video\robo\robodoor.asm
+----------------------------------------------
+No External CALLR's in this module.
+
+Processing d:\video\robo\pow1.asm
+----------------------------------------------
+No External CALLR's in this module.
+
+Processing d:\video\robo\pow2.asm
+----------------------------------------------
+No External CALLR's in this module.
+
+Processing d:\video\robo\trig.asm
+----------------------------------------------
+No External CALLR's in this module.
+
+Processing d:\video\robo\icons.asm
+----------------------------------------------
+No External CALLR's in this module.
+
+Processing d:\video\robo\tank.asm
+----------------------------------------------
+No External CALLR's in this module.
+
+Processing d:\video\robo\fatman.asm
+----------------------------------------------
+No External CALLR's in this module.
+
+Processing d:\video\robo\robopal.asm
+----------------------------------------------
+No External CALLR's in this module.
+
+Processing d:\video\robo\mutoid.asm
+----------------------------------------------
+No External CALLR's in this module.
+
+Processing d:\video\robo\mine.asm
+----------------------------------------------
+No External CALLR's in this module.
+
+Processing d:\video\robo\lzrorb.asm
+----------------------------------------------
+No External CALLR's in this module.
+
+Processing d:\video\robo\wlman.asm
+----------------------------------------------
+No External CALLR's in this module.
+
+Processing d:\video\robo\tvmntr.asm
+----------------------------------------------
+No External CALLR's in this module.
+
+Processing d:\video\robo\rboss.asm
+----------------------------------------------
+d:\video\robo\rboss.asm(80): CALLR to DOSHK0
+d:\video\robo\rboss.asm(82): CALLR to DOSHK0
+d:\video\robo\rboss.asm(86): CALLR to DOSHK0
+d:\video\robo\rboss.asm(88): CALLR to DOSHK0
+d:\video\robo\rboss.asm(92): CALLR to DOSHK0
+
+Processing d:\video\robo\robots.asm
+----------------------------------------------
+No External CALLR's in this module.
+
+Processing d:\video\robo\gal.asm
+----------------------------------------------
+No External CALLR's in this module.
+
+Processing d:\video\robo\cobra.asm
+----------------------------------------------
+d:\video\robo\cobra.asm(251): CALLR to STFVEL
+d:\video\robo\cobra.asm(309): CALLR to STFVEL
+d:\video\robo\cobra.asm(915): CALLR to STFVEL
+d:\video\robo\cobra.asm(1212): CALLR to STFVEL
+d:\video\robo\cobra.asm(1644): CALLR to STFVEL
+
+Processing d:\video\robo\snake.asm
+----------------------------------------------
+No External CALLR's in this module.
+
+Processing d:\video\robo\ndsp1.asm
+----------------------------------------------
+d:\video\robo\ndsp1.asm(480): JRxx to DZCHK1 (COMMENT)
+d:\video\robo\ndsp1.asm(482): JRxx to DZCHL (COMMENT)
+d:\video\robo\ndsp1.asm(489): JRxx to DISPX (COMMENT)
+d:\video\robo\ndsp1.asm(507): JRxx to DISPX (COMMENT)
+d:\video\robo\ndsp1.asm(946): JRxx to FREEE1 (COMMENT)
+d:\video\robo\ndsp1.asm(954): JRxx to FREERRX (COMMENT)
+d:\video\robo\ndsp1.asm(957): JRxx to FREEE2 (COMMENT)
+d:\video\robo\ndsp1.asm(965): JRxx to FREERRX (COMMENT)
+d:\video\robo\ndsp1.asm(971): JRxx to FREEE3 (COMMENT)
+d:\video\robo\ndsp1.asm(979): JRxx to FREERRX (COMMENT)
+d:\video\robo\ndsp1.asm(982): JRxx to FREEE4 (COMMENT)
+d:\video\robo\ndsp1.asm(990): JRxx to FREERRX (COMMENT)
+d:\video\robo\ndsp1.asm(993): JRxx to FREEEC (COMMENT)
+d:\video\robo\ndsp1.asm(1098): JRxx to NO_DEL (COMMENT)
+
+Processing d:\video\robo\ram.asm
+----------------------------------------------
+No External JRUC's in this module.
+
+Processing d:\video\robo\util.asm
+----------------------------------------------
+d:\video\robo\util.asm(230): JRxx to NOUP (COMMENT)
+d:\video\robo\util.asm(232): JRxx to UP (COMMENT)
+d:\video\robo\util.asm(252): JRxx to REG (COMMENT)
+d:\video\robo\util.asm(428): JRxx to SHVLCPX (COMMENT)
+d:\video\robo\util.asm(518): JRxx to XZCHKX (COMMENT)
+d:\video\robo\util.asm(537): JRxx to CLRPDL (COMMENT)
+d:\video\robo\util.asm(773): JRxx to DELSCHK1 (COMMENT)
+d:\video\robo\util.asm(775): JRxx to DELSX (COMMENT)
+d:\video\robo\util.asm(778): JRxx to DELSLUP (COMMENT)
+d:\video\robo\util.asm(787): JRxx to DELSCHK2 (COMMENT)
+d:\video\robo\util.asm(789): JRxx to DELSX (COMMENT)
+d:\video\robo\util.asm(792): JRxx to DELSLUP (COMMENT)
+d:\video\robo\util.asm(812): JRxx to ISEND (COMMENT)
+d:\video\robo\util.asm(814): JRxx to ISSEARCH (COMMENT)
+d:\video\robo\util.asm(822): JRxx to ISEND (COMMENT)
+d:\video\robo\util.asm(824): JRxx to ISSEARCH (COMMENT)
+d:\video\robo\util.asm(825): JRxx to ISFOUND (COMMENT)
+d:\video\robo\util.asm(842): JRxx to ISENDID (COMMENT)
+d:\video\robo\util.asm(845): JRxx to ISSRCHID (COMMENT)
+d:\video\robo\util.asm(853): JRxx to ISENDID (COMMENT)
+d:\video\robo\util.asm(856): JRxx to ISSRCHID (COMMENT)
+d:\video\robo\util.asm(857): JRxx to ISFNDID (COMMENT)
+d:\video\robo\util.asm(871): JRxx to CNTSUPPX (COMMENT)
+d:\video\robo\util.asm(875): JRxx to CNTSUPPX (COMMENT)
+d:\video\robo\util.asm(877): JRxx to CNTSUPPL (COMMENT)
+d:\video\robo\util.asm(1010): JRxx to PFRAME1 (COMMENT)
+d:\video\robo\util.asm(1013): JRxx to PFRAMEX (COMMENT)
+d:\video\robo\util.asm(1040): JRxx to PSTOPXX (COMMENT)
+d:\video\robo\util.asm(1052): JRxx to PSTOPYX (COMMENT)
+d:\video\robo\util.asm(1479): JRxx to FRAMSSC (COMMENT)
+d:\video\robo\util.asm(1483): JRxx to FRAMSNSP (COMMENT)
+d:\video\robo\util.asm(1487): JRxx to FRAMSNF (COMMENT)
+d:\video\robo\util.asm(1491): JRxx to FRAMSNP (COMMENT)
+d:\video\robo\util.asm(1495): JRxx to FRAMSNXZ (COMMENT)
+d:\video\robo\util.asm(1499): JRxx to FRAMSNY (COMMENT)
+d:\video\robo\util.asm(1503): JRxx to FRAMSND (COMMENT)
+
+Processing d:\video\robo\pall.asm
+----------------------------------------------
+No External JRUC's in this module.
+
+Processing d:\video\robo\mproc.asm
+----------------------------------------------
+No External JRUC's in this module.
+
+Processing d:\video\robo\bakgnd.asm
+----------------------------------------------
+No External JRUC's in this module.
+
+Processing d:\video\robo\bgndtbl.asm
+----------------------------------------------
+No External JRUC's in this module.
+
+Processing d:\video\robo\bgndpal.asm
+----------------------------------------------
+No External JRUC's in this module.
+
+Processing d:\video\robo\imgtbl.asm
+----------------------------------------------
+No External JRUC's in this module.
+
+Processing d:\video\robo\imgpal.asm
+----------------------------------------------
+No External JRUC's in this module.
+
+Processing d:\video\robo\main.asm
+----------------------------------------------
+No External JRUC's in this module.
+
+Processing d:\video\robo\robo.asm
+----------------------------------------------
+d:\video\robo\robo.asm(1352): JRxx to AVC (COMMENT)
+d:\video\robo\robo.asm(1411): JRxx to OSFF (COMMENT)
+d:\video\robo\robo.asm(1413): JRxx to OSFF (COMMENT)
+d:\video\robo\robo.asm(1419): JRxx to SFF (COMMENT)
+d:\video\robo\robo.asm(1835): JRxx to U1 (COMMENT)
+d:\video\robo\robo.asm(1854): JRxx to U2 (COMMENT)
+
+Processing d:\video\robo\score.asm
+----------------------------------------------
+d:\video\robo\score.asm(749): JRxx to PRESSCGO (COMMENT)
+d:\video\robo\score.asm(760): JRxx to PRESSBM (COMMENT)
+d:\video\robo\score.asm(833): JRxx to PRESSBMA (COMMENT)
+
+Processing d:\video\robo\shots.asm
+----------------------------------------------
+d:\video\robo\shots.asm(291): JRxx to CLEANUP (COMMENT)
+d:\video\robo\shots.asm(1000): JRxx to S9 (COMMENT)
+d:\video\robo\shots.asm(1180): JRxx to NOFC (COMMENT)
+d:\video\robo\shots.asm(1455): JRxx to DMY (COMMENT)
+
+Processing d:\video\robo\hulks.asm
+----------------------------------------------
+d:\video\robo\hulks.asm(511): JRxx to MVB (COMMENT)
+d:\video\robo\hulks.asm(722): JRxx to LK1 (COMMENT)
+d:\video\robo\hulks.asm(1337): JRxx to EXIT (COMMENT)
+
+Processing d:\video\robo\coll2.asm
+----------------------------------------------
+d:\video\robo\coll2.asm(917): JRxx to WH (COMMENT)
+d:\video\robo\coll2.asm(919): JRxx to WH (COMMENT)
+d:\video\robo\coll2.asm(921): JRxx to WH (COMMENT)
+d:\video\robo\coll2.asm(1107): JRxx to KBZ (COMMENT)
+d:\video\robo\coll2.asm(1264): JRxx to KTS (COMMENT)
+
+Processing d:\video\robo\sounds.asm
+----------------------------------------------
+No External JRUC's in this module.
+
+Processing d:\video\robo\patch.asm
+----------------------------------------------
+No External JRUC's in this module.
+
+Processing d:\video\robo\text.asm
+----------------------------------------------
+No External JRUC's in this module.
+
+Processing d:\video\robo\demo.asm
+----------------------------------------------
+d:\video\robo\demo.asm(412): JRxx to ZT (COMMENT)
+d:\video\robo\demo.asm(415): JRxx to ZT (COMMENT)
+d:\video\robo\demo.asm(440): JRxx to CZZ (COMMENT)
+d:\video\robo\demo.asm(442): JRxx to CZZ (COMMENT)
+
+Processing d:\video\robo\waves.asm
+----------------------------------------------
+d:\video\robo\waves.asm(718): JRxx to CV0 (COMMENT)
+d:\video\robo\waves.asm(1327): JRxx to REGJ (COMMENT)
+d:\video\robo\waves.asm(1345): JRxx to REGJ2 (COMMENT)
+d:\video\robo\waves.asm(1358): JRxx to UNOUT (COMMENT)
+d:\video\robo\waves.asm(1360): JRxx to SON1 (COMMENT)
+d:\video\robo\waves.asm(1363): JRxx to UNGET (COMMENT)
+d:\video\robo\waves.asm(1826): JRxx to DIOUT (COMMENT)
+d:\video\robo\waves.asm(1833): JRxx to DIOUT (COMMENT)
+d:\video\robo\waves.asm(1850): JRxx to DIOUT (COMMENT)
+d:\video\robo\waves.asm(1857): JRxx to DIOUT (COMMENT)
+d:\video\robo\waves.asm(3451): JRxx to NOM (COMMENT)
+d:\video\robo\waves.asm(3539): JRxx to FG (COMMENT)
+d:\video\robo\waves.asm(3898): JRxx to DIEOFF (COMMENT)
+d:\video\robo\waves.asm(4317): JRxx to TO (COMMENT)
+
+Processing d:\video\robo\roboatt.asm
+----------------------------------------------
+d:\video\robo\roboatt.asm(132): JRxx to AMJ (COMMENT)
+d:\video\robo\roboatt.asm(388): JRxx to ACJA (COMMENT)
+d:\video\robo\roboatt.asm(390): JRxx to ADPA (COMMENT)
+d:\video\robo\roboatt.asm(1435): JRxx to INTIME (COMMENT)
+d:\video\robo\roboatt.asm(1586): JRxx to INHERE1 (COMMENT)
+d:\video\robo\roboatt.asm(1673): JRxx to SF2 (COMMENT)
+d:\video\robo\roboatt.asm(1688): JRxx to BYSTAND2 (COMMENT)
+d:\video\robo\roboatt.asm(1691): JRxx to FIX2 (COMMENT)
+
+Processing d:\video\robo\hstd.asm
+----------------------------------------------
+No External JRUC's in this module.
+
+Processing d:\video\robo\adjust.asm
+----------------------------------------------
+d:\video\robo\adjust.asm(466): JRxx to DORET (COMMENT)
+d:\video\robo\adjust.asm(479): JRxx to DORET (COMMENT)
+d:\video\robo\adjust.asm(484): JRxx to WD1 (COMMENT)
+
+Processing d:\video\robo\audit.asm
+----------------------------------------------
+d:\video\robo\audit.asm(657): JRxx to FOR (COMMENT)
+d:\video\robo\audit.asm(793): JRxx to CKCN1 (COMMENT)
+d:\video\robo\audit.asm(2135): JRxx to CCC_X (COMMENT)
+
+Processing d:\video\robo\menu.asm
+----------------------------------------------
+d:\video\robo\menu.asm(869): JRxx to ITSTHERE (COMMENT)
+d:\video\robo\menu.asm(873): JRxx to NOT_HOME (COMMENT)
+d:\video\robo\menu.asm(879): JRxx to NOT_HOME (COMMENT)
+d:\video\robo\menu.asm(882): JRxx to GO_S1 (COMMENT)
+d:\video\robo\menu.asm(890): JRxx to SYNT_ERR (COMMENT)
+d:\video\robo\menu.asm(892): JRxx to DOSYE (COMMENT)
+d:\video\robo\menu.asm(900): JRxx to ST_QU (COMMENT)
+d:\video\robo\menu.asm(959): JRxx to YAM_BAD (COMMENT)
+d:\video\robo\menu.asm(963): JRxx to YAM_OK (COMMENT)
+d:\video\robo\menu.asm(966): JRxx to YAM_LOOP (COMMENT)
+d:\video\robo\menu.asm(969): JRxx to YAM_LOOP (COMMENT)
+d:\video\robo\menu.asm(1039): JRxx to GO_SYNP1 (COMMENT)
+d:\video\robo\menu.asm(1060): JRxx to GO_DYNP1 (COMMENT)
+d:\video\robo\menu.asm(1078): JRxx to INC_IT (COMMENT)
+d:\video\robo\menu.asm(1081): JRxx to NO_INC (COMMENT)
+
+Processing d:\video\robo\test.asm
+----------------------------------------------
+d:\video\robo\test.asm(149): JRxx to DO_AMODE (COMMENT)
+d:\video\robo\test.asm(160): JRxx to DONT_CLEAR (COMMENT)
+d:\video\robo\test.asm(205): JRxx to AMODE (COMMENT)
+d:\video\robo\test.asm(719): JRxx to WAIT_FOR_DOOR (COMMENT)
+d:\video\robo\test.asm(767): JRxx to WT_ADV (COMMENT)
+d:\video\robo\test.asm(787): JRxx to WW_ADV (COMMENT)
+d:\video\robo\test.asm(1433): JRxx to LOOP (COMMENT)
+d:\video\robo\test.asm(1643): JRxx to DO_SHELP (COMMENT)
+d:\video\robo\test.asm(1645): JRxx to DO_SPLAY (COMMENT)
+d:\video\robo\test.asm(1662): JRxx to DO_SH1 (COMMENT)
+d:\video\robo\test.asm(1680): JRxx to CK_SYNT (COMMENT)
+d:\video\robo\test.asm(1688): JRxx to DO_SPQX (COMMENT)
+d:\video\robo\test.asm(1691): JRxx to DO_SP1 (COMMENT)
+d:\video\robo\test.asm(1699): JRxx to DO_SPQX (COMMENT)
+d:\video\robo\test.asm(1727): JRxx to DO_SPX (COMMENT)
+
+Processing d:\video\robo\chaser.asm
+----------------------------------------------
+d:\video\robo\chaser.asm(204): JRxx to C32 (COMMENT)
+
+Processing d:\video\robo\endwave.asm
+----------------------------------------------
+No External JRUC's in this module.
+
+Processing d:\video\robo\robodoor.asm
+----------------------------------------------
+No External JRUC's in this module.
+
+Processing d:\video\robo\pow1.asm
+----------------------------------------------
+d:\video\robo\pow1.asm(116): JRxx to IP (COMMENT)
+
+Processing d:\video\robo\pow2.asm
+----------------------------------------------
+No External JRUC's in this module.
+
+Processing d:\video\robo\trig.asm
+----------------------------------------------
+No External JRUC's in this module.
+
+Processing d:\video\robo\icons.asm
+----------------------------------------------
+No External JRUC's in this module.
+
+Processing d:\video\robo\tank.asm
+----------------------------------------------
+d:\video\robo\tank.asm(117): JRxx to TANK_OU (COMMENT)
+d:\video\robo\tank.asm(186): JRxx to NOCHNG (COMMENT)
+d:\video\robo\tank.asm(727): JRxx to NOCHNG0 (COMMENT)
+
+Processing d:\video\robo\fatman.asm
+----------------------------------------------
+d:\video\robo\fatman.asm(551): JRxx to KS (COMMENT)
+
+Processing d:\video\robo\robopal.asm
+----------------------------------------------
+No External JRUC's in this module.
+
+Processing d:\video\robo\mutoid.asm
+----------------------------------------------
+d:\video\robo\mutoid.asm(1099): JRxx to SPWAGN (COMMENT)
+d:\video\robo\mutoid.asm(1354): JRxx to X1 (COMMENT)
+d:\video\robo\mutoid.asm(1367): JRxx to X2 (COMMENT)
+d:\video\robo\mutoid.asm(2164): JRxx to MO0 (COMMENT)
+d:\video\robo\mutoid.asm(2168): JRxx to LOP (COMMENT)
+d:\video\robo\mutoid.asm(2893): JRxx to ET1 (COMMENT)
+d:\video\robo\mutoid.asm(2962): JRxx to MCON4 (COMMENT)
+d:\video\robo\mutoid.asm(3067): JRxx to PRRO (COMMENT)
+d:\video\robo\mutoid.asm(3813): JRxx to SKPIT (COMMENT)
+d:\video\robo\mutoid.asm(3822): JRxx to SKPIT2 (COMMENT)
+
+Processing d:\video\robo\mine.asm
+----------------------------------------------
+No External JRUC's in this module.
+
+Processing d:\video\robo\lzrorb.asm
+----------------------------------------------
+No External JRUC's in this module.
+
+Processing d:\video\robo\wlman.asm
+----------------------------------------------
+d:\video\robo\wlman.asm(192): JRxx to TYU (COMMENT)
+
+Processing d:\video\robo\tvmntr.asm
+----------------------------------------------
+d:\video\robo\tvmntr.asm(275): JRxx to MCT1 (COMMENT)
+
+Processing d:\video\robo\rboss.asm
+----------------------------------------------
+d:\video\robo\rboss.asm(1048): JRxx to CCYCSLP (COMMENT)
+d:\video\robo\rboss.asm(1053): JRxx to COLCYCP (COMMENT)
+
+Processing d:\video\robo\robots.asm
+----------------------------------------------
+d:\video\robo\robots.asm(108): JRxx to DIERBT (COMMENT)
+d:\video\robo\robots.asm(110): JRxx to DIERBT (COMMENT)
+d:\video\robo\robots.asm(522): JRxx to LP5 (COMMENT)
+d:\video\robo\robots.asm(538): JRxx to SUP (COMMENT)
+d:\video\robo\robots.asm(540): JRxx to B8O (COMMENT)
+d:\video\robo\robots.asm(547): JRxx to BATDN (COMMENT)
+d:\video\robo\robots.asm(556): JRxx to BATDN (COMMENT)
+d:\video\robo\robots.asm(558): JRxx to B10O (COMMENT)
+d:\video\robo\robots.asm(566): JRxx to BATDN (COMMENT)
+d:\video\robo\robots.asm(648): JRxx to MVB (COMMENT)
+d:\video\robo\robots.asm(790): JRxx to CHECK_NEXT (COMMENT)
+
+Processing d:\video\robo\gal.asm
+----------------------------------------------
+No External JRUC's in this module.
+
+Processing d:\video\robo\cobra.asm
+----------------------------------------------
+d:\video\robo\cobra.asm(1159): JRxx to COBBLOP0 (COMMENT)
+
+Processing d:\video\robo\snake.asm
+----------------------------------------------
+No External JRUC's in this module.
+
